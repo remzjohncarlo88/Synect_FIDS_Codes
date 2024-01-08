@@ -1,3 +1,4 @@
+using FidsCodingAssignment.Repositories;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -21,6 +22,8 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+
+builder.Services.AddScoped<IFlightInfoRepository, FlightInfoRepository>();
 
 var app = builder.Build();
 

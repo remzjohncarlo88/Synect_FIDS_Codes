@@ -11,11 +11,11 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// Aircraft Registration Number
         /// </summary>
-        public int AircraftRegNumber { get; set; }
+        public Nullable<int> AircraftRegNumber { get; set; }
         /// <summary>
         /// Parent Flight Id
         /// </summary>
-        public int ParentFlightId { get; set; }
+        public Nullable<int> ParentFlightId { get; set; }
         /// <summary>
         /// Remote Airport SCH DTM
         /// </summary>
@@ -90,11 +90,11 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// Flight Number
         /// </summary>
-        public int FlightNumber { get; set; }
+        public Nullable<int> FlightNumber { get; set; }
         /// <summary>
         /// Flight Id
         /// </summary>
-        public int FlightId { get; set; }
+        public Nullable<int> FlightId { get; set; }
         /// <summary>
         /// Terminal Code
         /// </summary>
