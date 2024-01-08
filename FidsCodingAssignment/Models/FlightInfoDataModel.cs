@@ -53,7 +53,8 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// Scheduled Time
         /// </summary>
-        public string? Sched_Time { get; set; }
+        [JsonPropertyName("Sched_Time")]
+        public string? ScheduleTime { get; set; }
         /// <summary>
         /// Arr Dep
         /// </summary>
@@ -65,7 +66,8 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// City Name
         /// </summary>
-        public string? City_name { get; set; }
+        [JsonPropertyName("City_Name")]
+        public string? CityName { get; set; }
         /// <summary>
         /// Flight Type
         /// </summary>
@@ -102,11 +104,13 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// Airline Name
         /// </summary>
-        public string? Airline_Name { get; set; }
+        [JsonPropertyName("Airline_Name")]
+        public string? AirlineName { get; set; }
         /// <summary>
         /// Airline Time
         /// </summary>
-        public string? Airline_Time { get; set; }
+        [JsonPropertyName("Airline_Time")]
+        public string? AirlineTime { get; set; }
         /// <summary>
         /// Flight Status Code
         /// </summary>

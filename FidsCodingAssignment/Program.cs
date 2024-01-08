@@ -1,4 +1,5 @@
 using FidsCodingAssignment.Repositories;
+using FidsCodingAssignment.Services;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -24,6 +25,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddScoped<IFlightInfoRepository, FlightInfoRepository>();
+builder.Services.AddScoped<IFlightInfoService, FlightInfoService>();
 
 var app = builder.Build();
 
