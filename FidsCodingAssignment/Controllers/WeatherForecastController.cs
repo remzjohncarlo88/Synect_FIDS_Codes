@@ -1,3 +1,4 @@
+using FidsCodingAssignment.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FidsCodingAssignment.Controllers
@@ -18,7 +19,7 @@ namespace FidsCodingAssignment.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet("GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -28,6 +29,17 @@ namespace FidsCodingAssignment.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        /// <summary>
+        /// GetFlightInfoDataModelbyID
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetFlightInfoDataModelbyID")]
+        public List<FlightInfoDataModel> GetFlightInfoDataModel()
+        {
+            List<FlightInfoDataModel> flightInfoDataModel = new List<FlightInfoDataModel>();
+            return flightInfoDataModel;
         }
     }
 }
