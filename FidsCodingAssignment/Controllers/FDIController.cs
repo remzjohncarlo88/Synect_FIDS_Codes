@@ -1,4 +1,5 @@
 using FidsCodingAssignment.Models;
+using FidsCodingAssignment.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FidsCodingAssignment.Controllers
@@ -11,25 +12,30 @@ namespace FidsCodingAssignment.Controllers
     public class FDIController : ControllerBase
     {
         private readonly ILogger<FDIController> _logger;
+        private readonly IFlightInfoService _flightInfoService;
 
         /// <summary>
         /// FDIController constructor
         /// </summary>
-        /// <param name="logger"></param>
-        public FDIController(ILogger<FDIController> logger)
+        /// <param name="logger">logger object</param>
+        /// <param name="flightInfoService">flight info service object</param>
+        public FDIController(ILogger<FDIController> logger, IFlightInfoService flightInfoService)
         {
             _logger = logger;
+            _flightInfoService = flightInfoService;
         }
 
         /// <summary>
-        /// GetFlightInfoDataModelbyID
+        /// Check Flight Status
         /// </summary>
+        /// <param name="airlineCode">airline code</param>
+        /// <param name="flightNumber">flight number</param>
         /// <returns></returns>
-        [HttpGet("GetFlightInfoDataModelbyID")]
-        public List<FlightInfoDataModel> GetFlightInfoDataModel()
+        [HttpGet("CheckFlightStatus")]
+        public FlightDataDisplayModel CheckFlightStatus(string airlineCode, int flightNumber)
         {
-            List<FlightInfoDataModel> flightInfoDataModel = new List<FlightInfoDataModel>();
-            return flightInfoDataModel;
+            var flightStatus = _flightInfoService.CheckFlightStatus(airlineCode, flightNumber);
+            return flightStatus;
         }
     }
 }
