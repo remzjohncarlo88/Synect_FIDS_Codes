@@ -64,5 +64,16 @@ namespace Test_FID.Controllers
             // Assert
             Assert.Equal("TK 8659", (items.Value as FlightDataDisplayModel).FlightId);
         }
+
+        [Fact]
+        public void CheckActiveFlightAtGate_WhenCalled_ReturnsNoContentResult()
+        {
+            // Act
+            var items = _controller.CheckActiveFlightAtGate("E1");
+            // Act
+            var noContentResponse = items;
+            // Assert
+            Assert.IsType<NotFoundResult>(noContentResponse);
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace FidsCodingAssignment.Services
                 bool isArrival = _flightInfoDataModel.ArrDep.Equals("ARR") ? true : false;
                 bool isBoarding = DateTime.Compare(DateTime.Now, Convert.ToDateTime(_flightInfoDataModel.EstimatedTime)) < 0
                     || DateTime.Now.Subtract(Convert.ToDateTime(_flightInfoDataModel.ScheduleTime)).TotalMinutes <= boarding_Time_Minutes;
-
+                
                 fid.Classification = isArrival ? "ARRIVAL" : "DEPARTURE";
                 fid.FlightId = string.Concat(_flightInfoDataModel.AirlineCode, ' ', _flightInfoDataModel.FlightNumber);
                 fid.OriginalTime = _flightInfoDataModel.ScheduleTime;
@@ -97,7 +97,7 @@ namespace FidsCodingAssignment.Services
                 bool isArrival = _flightInfoDataModel.ArrDep.Equals("ARR") ? true : false;
                 bool isBoarding = DateTime.Compare(DateTime.Now, Convert.ToDateTime(_flightInfoDataModel.EstimatedTime)) < 0
                     || DateTime.Now.Subtract(Convert.ToDateTime(_flightInfoDataModel.ScheduleTime)).TotalMinutes <= boarding_Time_Minutes;
-
+                
                 fid.Classification = isArrival ? "ARRIVAL" : "DEPARTURE";
                 fid.FlightId = string.Concat(_flightInfoDataModel.AirlineCode, ' ', _flightInfoDataModel.FlightNumber);
                 fid.OriginalTime = _flightInfoDataModel.ScheduleTime;
