@@ -11,7 +11,7 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// Aircraft Registration Number
         /// </summary>
-        public Nullable<int> AircraftRegNumber { get; set; }
+        public string? AircraftRegNumber { get; set; }
         /// <summary>
         /// Parent Flight Id
         /// </summary>
@@ -58,7 +58,7 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// Arr Dep
         /// </summary>
-        public string? ArrDep { get; set; }
+        public string ArrDep { get; set; } = string.Empty;
         /// <summary>
         /// bag belt
         /// </summary>
@@ -122,7 +122,7 @@ namespace FidsCodingAssignment.Models
         /// <summary>
         /// Parent FLT Number
         /// </summary>
-        public string? ParentFLTNumber { get; set; }
+        public Nullable<int> ParentFLTNumber { get; set; }
         /// <summary>
         /// Gate Code
         /// </summary>

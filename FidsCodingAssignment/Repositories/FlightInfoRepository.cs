@@ -10,17 +10,16 @@ namespace FidsCodingAssignment.Repositories
     /// </summary>
     public class FlightInfoRepository : IFlightInfoRepository
     {
-        private readonly IEnumerable<FlightInfoDataModel> _dbSet;
+        private readonly MainFIDModel _dbSet;
         private readonly JsonSerializerOptions _options = new()
         {
-            PropertyNameCaseInsensitive = false
+            PropertyNameCaseInsensitive = true
         };
 
         /// <summary>
         /// FlightInfoRepository constructor
         /// </summary>
-        /// <param name="context"></param>
-        public FlightInfoRepository(DbContext context)
+        public FlightInfoRepository()
         {
             _dbSet = GetAll();
         }
@@ -29,11 +28,11 @@ namespace FidsCodingAssignment.Repositories
         /// Get All Flight Information Data from JSON file
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<FlightInfoDataModel> GetAll()
+        public MainFIDModel GetAll()
         {
-            var json = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "rawData.json"));
-            List<FlightInfoDataModel>? fids = JsonSerializer.Deserialize<List<FlightInfoDataModel>>(json, _options);
-            
+            var jsonPath = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Data\\rawData.json"));
+            MainFIDModel? fids = JsonSerializer.Deserialize<MainFIDModel>(jsonPath, _options);
+
             return fids;
         }
         /// <summary>
@@ -44,7 +43,7 @@ namespace FidsCodingAssignment.Repositories
         /// <returns></returns>
         public FlightInfoDataModel CheckFlightStatus(string airlineCode, int flightNumber)
         {
-            return _dbSet.FirstOrDefault(d => d.AirlineCode == airlineCode && d.FlightNumber == flightNumber);
+            return _dbSet.DFWGateLoungeFlightList.FirstOrDefault(d => d.AirlineCode == airlineCode && d.FlightNumber == flightNumber);
         }
         /// <summary>
         /// Check Currently Active Flight At Gate

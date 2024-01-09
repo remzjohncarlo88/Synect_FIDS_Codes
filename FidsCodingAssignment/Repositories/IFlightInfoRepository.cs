@@ -11,7 +11,7 @@ namespace FidsCodingAssignment.Repositories
         /// Get All Flight Information Data from JSON file
         /// </summary>
         /// <returns></returns>
-        IEnumerable<FlightInfoDataModel> GetAll();
+        MainFIDModel GetAll();
         /// <summary>
         /// Check Flight Status
         /// </summary>

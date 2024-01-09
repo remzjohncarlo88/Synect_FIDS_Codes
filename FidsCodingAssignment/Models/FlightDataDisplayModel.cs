@@ -10,7 +10,11 @@
         /// </summary>
         public string? Classification { get; set; }
         /// <summary>
-        /// Original Time (Arrival/Departure)
+        /// Airline Code + FlightNumber
+        /// </summary>
+        public string? FlightId { get; set; }
+        /// <summary>
+        /// Original Time (Departure)
         /// </summary>
         public string? OriginalTime { get; set; }
         /// <summary>
@@ -18,17 +22,13 @@
         /// </summary>
         public string? OriginPlace { get; set; }
         /// <summary>
-        /// Flight Number
-        /// </summary>
-        public Nullable<int> FlightNumber { get; set; }
-        /// <summary>
-        /// Airline Code
-        /// </summary>
-        public string? AirlineCode { get; set; }
-        /// <summary>
         /// Actual Time Of Arrival
         /// </summary>
         public string? ActualTimeOfArrival { get; set; }
+        /// <summary>
+        /// Destination (Departure)
+        /// </summary>
+        public string? Destination { get; set; }
         /// <summary>
         /// Actual Time Of Departure
         /// </summary>
@@ -38,16 +38,12 @@
         /// </summary>
         public string? AirlineName { get; set; }
         /// <summary>
-        /// Destination (Departure)
-        /// </summary>
-        public string? Destination { get; set; }
-        /// <summary>
-        /// Flight Status (Departure)
-        /// </summary>
-        public string? FlightStatus { get; set; }
-        /// <summary>
         /// Gate Code
         /// </summary>
         public string? GateCode { get; set; }
+        /// <summary>
+        /// Flight Status (Departure)
+        /// </summary>
+        public string? Status { get; set; }
     }
 }

@@ -31,7 +31,11 @@ namespace FidsCodingAssignment.Controllers
         /// <param name="airlineCode">airline code</param>
         /// <param name="flightNumber">flight number</param>
         /// <returns></returns>
-        [HttpGet("CheckFlightStatus")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FlightDataDisplayModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("CheckFlightStatus")]        
         public FlightDataDisplayModel CheckFlightStatus(string airlineCode, int flightNumber)
         {
             var flightStatus = _flightInfoService.CheckFlightStatus(airlineCode, flightNumber);
