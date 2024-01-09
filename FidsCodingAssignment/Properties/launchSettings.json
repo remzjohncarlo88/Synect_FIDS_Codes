@@ -16,7 +16,10 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7248;http://localhost:5248",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Arrival_Time_Allowance": "15",
+        "Departure_Time_Allowance": "15",
+        "Boarding_Time_Minutes" : "30"
       }
     },
     "IIS Express": {
