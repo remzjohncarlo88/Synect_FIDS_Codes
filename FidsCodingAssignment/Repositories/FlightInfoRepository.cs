@@ -46,15 +46,6 @@ namespace FidsCodingAssignment.Repositories
             return _dbSet.DFWGateLoungeFlightList.FirstOrDefault(d => d.AirlineCode == airlineCode && d.FlightNumber == flightNumber);
         }
         /// <summary>
-        /// Check Currently Active Flight At Gate
-        /// </summary>
-        /// <param name="gateCode"></param>
-        /// <returns></returns>
-        public FlightInfoDataModel CheckActiveFlightAtGate(string gateCode)
-        {
-            return null;
-        }
-        /// <summary>
         /// Get Delayed Flights
         /// </summary>
         /// <returns></returns>
@@ -69,6 +60,20 @@ namespace FidsCodingAssignment.Repositories
                 > (a.ArrDep.Equals("ARR") ? arrival_Time_Allowance : departure_Time_Allowance)).ToList();
 
             return fids;
+        }
+        /// <summary>
+        /// Check Currently Active Flight At Gate
+        /// </summary>
+        /// <param name="gateCode"></param>
+        /// <returns></returns>
+        public FlightInfoDataModel CheckActiveFlightAtGate(string gateCode)
+        {
+            int boarding_Time_Minutes = Convert.ToInt32(Environment.GetEnvironmentVariable("Boarding_Time_Minutes"));
+
+            return _dbSet.DFWGateLoungeFlightList.FirstOrDefault(d => d.GateCode == gateCode
+                    && d.ArrDep.Equals("DEP")
+                    && DateTime.Compare(DateTime.Now, Convert.ToDateTime(d.EstimatedTime)) < 0
+                    && DateTime.Now.Subtract(Convert.ToDateTime(d.ScheduleTime)).TotalMinutes <= boarding_Time_Minutes);
         }
     }
 }

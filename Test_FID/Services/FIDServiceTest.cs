@@ -17,11 +17,11 @@ namespace Test_FID.Services
             _fids = new List<FlightDataDisplayModel>()
             {
                 new FlightDataDisplayModel() { Classification = "DEP", FlightId = "QR 3905", OriginalTime = Convert.ToDateTime("2023-08-08T22:10:00Z"), OriginPlace = null, ActualTimeOfArrival = null,
-                    Destination = "Boston", ActualTimeOfDeparture = Convert.ToDateTime("2023-08-08T23:16:00Z"), AirlineName = "QATARI", GateCode = "E7", Status = "At 6:16p"},
+                    Destination = "Boston", ActualTimeOfDeparture = Convert.ToDateTime("2023-08-08T23:16:00Z"), AirlineName = "QATARI", GateCode = "E7", Status = "Boarding"},
                 new FlightDataDisplayModel() { Classification = "ARR", FlightId = "TK 8658", OriginalTime = Convert.ToDateTime("2023-08-08T15:07:00Z"), OriginPlace = "Toronto", ActualTimeOfArrival = Convert.ToDateTime("2023-08-08T17:07:00Z"),
-                    Destination = null, ActualTimeOfDeparture = null, AirlineName = "TURKAIR", GateCode = null, Status = "Delayed"},
+                    Destination = null, ActualTimeOfDeparture = null, AirlineName = "TURKAIR", GateCode = null, Status = "Boarding"},
                 new FlightDataDisplayModel() { Classification = "DEP", FlightId = "TK 8659", OriginalTime = Convert.ToDateTime("2023-08-08T16:00:00Z"), OriginPlace = null, ActualTimeOfArrival = null,
-                    Destination = "Toronto", ActualTimeOfDeparture = Convert.ToDateTime("2023-08-08T17:50:00Z"), AirlineName = "TURKAIR", GateCode = "E2", Status = "Delayed"}
+                    Destination = "Toronto", ActualTimeOfDeparture = Convert.ToDateTime("2023-08-08T17:50:00Z"), AirlineName = "TURKAIR", GateCode = "E2", Status = "Boarding"}
             };
         }
 
@@ -51,6 +51,20 @@ namespace Test_FID.Services
                 > (a.Classification.Equals("ARR") ? arrival_Time_Allowance : departure_Time_Allowance)).ToList();
 
             return fids;
+        }
+        /// <summary>
+        /// Check Currently Active Flight At Gate
+        /// </summary>
+        /// <param name="gateCode"></param>
+        /// <returns></returns>
+        public FlightDataDisplayModel CheckActiveFlightAtGate(string gateCode)
+        {
+            int boarding_Time_Minutes = Convert.ToInt32(Environment.GetEnvironmentVariable("Boarding_Time_Minutes"));
+
+            return _fids.FirstOrDefault(d => d.GateCode == gateCode
+                    && d.Classification.Equals("DEP")
+                    && DateTime.Compare(Convert.ToDateTime("2023-08-08T15:58:00Z"), Convert.ToDateTime(d.ActualTimeOfDeparture)) < 0
+                    && Convert.ToDateTime("2023-08-08T15:58:00Z").Subtract(Convert.ToDateTime(d.OriginalTime)).TotalMinutes <= boarding_Time_Minutes);
         }
     }
 }

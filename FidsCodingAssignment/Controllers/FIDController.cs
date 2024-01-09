@@ -57,5 +57,23 @@ namespace FidsCodingAssignment.Controllers
 
             return Ok(delayedFlights);
         }
+
+        /// <summary>
+        /// Check Currently Active Flight At Gate
+        /// </summary>
+        /// <param name="gateCode"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FlightDataDisplayModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("CheckActiveFlightAtGate")]
+        public IActionResult CheckActiveFlightAtGate(string gateCode)
+        {
+            var activeFlightAtGate = _flightInfoService.CheckActiveFlightAtGate(gateCode);
+
+            if (activeFlightAtGate == null)
+                return NotFound();
+
+            return Ok(activeFlightAtGate);
+        }
     }
 }

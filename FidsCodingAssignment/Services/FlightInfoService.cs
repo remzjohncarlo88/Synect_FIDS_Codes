@@ -31,11 +31,15 @@ namespace FidsCodingAssignment.Services
         {
             FlightInfoDataModel _flightInfoDataModel = _flightInfoRepository.CheckFlightStatus(airlineCode, flightNumber);
             FlightDataDisplayModel fid = new FlightDataDisplayModel();
+            int boarding_Time_Minutes = Convert.ToInt32(Environment.GetEnvironmentVariable("Boarding_Time_Minutes"));
 
             if (_flightInfoDataModel != null)
             {
                 bool isArrival = _flightInfoDataModel.ArrDep.Equals("ARR") ? true : false;
-                fid.Classification = _flightInfoDataModel.ArrDep.Equals("ARR") ? "ARRIVAL" : "DEPARTURE";
+                bool isBoarding = DateTime.Compare(DateTime.Now, Convert.ToDateTime(_flightInfoDataModel.EstimatedTime)) < 0
+                    || DateTime.Now.Subtract(Convert.ToDateTime(_flightInfoDataModel.ScheduleTime)).TotalMinutes <= boarding_Time_Minutes;
+
+                fid.Classification = isArrival ? "ARRIVAL" : "DEPARTURE";
                 fid.FlightId = string.Concat(_flightInfoDataModel.AirlineCode, ' ', _flightInfoDataModel.FlightNumber);
                 fid.OriginalTime = _flightInfoDataModel.ScheduleTime;
                 fid.AirlineName = _flightInfoDataModel.AirlineName;
@@ -43,7 +47,8 @@ namespace FidsCodingAssignment.Services
                 fid.ActualTimeOfArrival = isArrival ? _flightInfoDataModel.EstimatedTime : null;
                 fid.Destination = !isArrival ? _flightInfoDataModel.CityName : null;
                 fid.GateCode = !isArrival ? _flightInfoDataModel.GateCode : null;
-                fid.ActualTimeOfDeparture = !isArrival ? _flightInfoDataModel.EstimatedTime : null;
+                fid.ActualTimeOfDeparture = !isArrival ? _flightInfoDataModel.EstimatedTime : null;                
+                fid.Status = isArrival ? _flightInfoDataModel.Remarks : isBoarding ? "Boarding" : "Closed";
             }
 
             return fid;
@@ -75,6 +80,35 @@ namespace FidsCodingAssignment.Services
             }
 
             return delayedFlightList;
+        }
+        /// <summary>
+        /// Check Currently Active Flight At Gate
+        /// </summary>
+        /// <param name="gateCode"></param>
+        /// <returns></returns>
+        public FlightDataDisplayModel CheckActiveFlightAtGate(string gateCode)
+        {
+            FlightInfoDataModel _flightInfoDataModel = _flightInfoRepository.CheckActiveFlightAtGate(gateCode);
+            FlightDataDisplayModel fid = new FlightDataDisplayModel();
+            int boarding_Time_Minutes = Convert.ToInt32(Environment.GetEnvironmentVariable("Boarding_Time_Minutes"));
+
+            if (_flightInfoDataModel != null)
+            {
+                bool isArrival = _flightInfoDataModel.ArrDep.Equals("ARR") ? true : false;
+                bool isBoarding = DateTime.Compare(DateTime.Now, Convert.ToDateTime(_flightInfoDataModel.EstimatedTime)) < 0
+                    || DateTime.Now.Subtract(Convert.ToDateTime(_flightInfoDataModel.ScheduleTime)).TotalMinutes <= boarding_Time_Minutes;
+
+                fid.Classification = isArrival ? "ARRIVAL" : "DEPARTURE";
+                fid.FlightId = string.Concat(_flightInfoDataModel.AirlineCode, ' ', _flightInfoDataModel.FlightNumber);
+                fid.OriginalTime = _flightInfoDataModel.ScheduleTime;
+                fid.AirlineName = _flightInfoDataModel.AirlineName;
+                fid.Destination = _flightInfoDataModel.CityName;
+                fid.GateCode = _flightInfoDataModel.GateCode;
+                fid.ActualTimeOfDeparture = _flightInfoDataModel.EstimatedTime;
+                fid.Status = isArrival ? _flightInfoDataModel.Remarks : isBoarding ? "Boarding" : "Closed";
+            }
+
+            return fid;
         }
     }
 }

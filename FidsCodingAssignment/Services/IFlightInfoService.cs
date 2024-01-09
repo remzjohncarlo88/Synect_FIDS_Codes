@@ -19,5 +19,11 @@ namespace FidsCodingAssignment.Services
         /// </summary>
         /// <returns></returns>
         IEnumerable<FlightDataDisplayModel> GetDelayedFlights();
+        /// <summary>
+        /// Check Currently Active Flight At Gate
+        /// </summary>
+        /// <param name="gateCode"></param>
+        /// <returns></returns>
+        FlightDataDisplayModel CheckActiveFlightAtGate(string gateCode);
     }
 }
