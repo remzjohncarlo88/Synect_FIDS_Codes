@@ -16,16 +16,26 @@ namespace FidsCodingAssignment.Models
         /// Parent Flight Id
         /// </summary>
         public Nullable<int> ParentFlightId { get; set; }
+        DateTime? _remoteAirportSchDtm;
         /// <summary>
         /// Remote Airport SCH DTM
         /// </summary>
         [JsonPropertyName("Remote_Airport_SCH_DTM")]
-        public string? RemoteAirportSchDtm { get; set; }
+        public DateTime? RemoteAirportSchDtm
+        {
+            get { return _remoteAirportSchDtm; }
+            set { _remoteAirportSchDtm = Convert.ToDateTime(value); }
+        }
+        DateTime? _remoteAirportActDtm;
         /// <summary>
         /// Remote Airport ACT DTM
         /// </summary>
         [JsonPropertyName("Remote_Airport_ACT_DTM")]
-        public string? RemoteAirportActDtm { get; set; }
+        public DateTime? RemoteAirportActDtm
+        {
+            get { return _remoteAirportActDtm; }
+            set { _remoteAirportActDtm = Convert.ToDateTime(value); }
+        }
         /// <summary>
         /// Airport Code
         /// </summary>
@@ -50,11 +60,16 @@ namespace FidsCodingAssignment.Models
         /// Via Airport Codes
         /// </summary>
         public string? ViaAirportCodes { get; set; }
+        DateTime? _scheduleTime;
         /// <summary>
         /// Scheduled Time
         /// </summary>
         [JsonPropertyName("Sched_Time")]
-        public string? ScheduleTime { get; set; }
+        public DateTime? ScheduleTime
+        {
+            get { return _scheduleTime; }
+            set { _scheduleTime = Convert.ToDateTime(value); }
+        }
         /// <summary>
         /// Arr Dep
         /// </summary>
@@ -72,11 +87,16 @@ namespace FidsCodingAssignment.Models
         /// Flight Type
         /// </summary>
         public string? FlightType { get; set; }
+        DateTime? _remoteAirportEstDtm;
         /// <summary>
-        /// Remote Airport EST DTM
+        /// Airline Time
         /// </summary>
         [JsonPropertyName("Remote_Airport_EST_DTM")]
-        public string? RemoteAirportEstDtm { get; set; }
+        public DateTime? RemoteAirportEstDtm
+        {
+            get { return _remoteAirportEstDtm; }
+            set { _remoteAirportEstDtm = Convert.ToDateTime(value); }
+        }
         /// <summary>
         /// Event
         /// </summary>
@@ -106,11 +126,16 @@ namespace FidsCodingAssignment.Models
         /// </summary>
         [JsonPropertyName("Airline_Name")]
         public string? AirlineName { get; set; }
+        DateTime? _actualTimee;
         /// <summary>
         /// Airline Time
         /// </summary>
-        [JsonPropertyName("Airline_Time")]
-        public string? AirlineTime { get; set; }
+        [JsonPropertyName("Actual_Time")]
+        public DateTime? ActualTime
+        {
+            get { return _actualTimee; }
+            set { _actualTimee = Convert.ToDateTime(value); }
+        }
         /// <summary>
         /// Flight Status Code
         /// </summary>
@@ -131,11 +156,16 @@ namespace FidsCodingAssignment.Models
         /// Remarks
         /// </summary>
         public string? Remarks { get; set; }
+        DateTime? _estimatedTime;
         /// <summary>
-        /// Estimated Time
+        /// Airline Time
         /// </summary>
         [JsonPropertyName("Estimated_Time")]
-        public string? EstimatedTime { get; set; }
+        public DateTime? EstimatedTime
+        {
+            get { return _estimatedTime; }
+            set { _estimatedTime = Convert.ToDateTime(value); }
+        }
         /// <summary>
         /// Dep Boarding Start DTM
         /// </summary>

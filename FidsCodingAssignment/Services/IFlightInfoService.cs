@@ -14,5 +14,10 @@ namespace FidsCodingAssignment.Services
         /// <param name="flightNumber">flight number</param>
         /// <returns></returns>
         FlightDataDisplayModel CheckFlightStatus(string airlineCode, int flightNumber);
+        /// <summary>
+        /// Get Delayed Flights
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<FlightDataDisplayModel> GetDelayedFlights();
     }
 }

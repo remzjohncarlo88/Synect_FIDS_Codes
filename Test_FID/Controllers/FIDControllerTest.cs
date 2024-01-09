@@ -45,5 +45,15 @@ namespace Test_FID.Controllers
             // Assert
             Assert.IsType<NotFoundResult>(noContentResponse);
         }
+
+        [Fact]
+        public void GetDelayedFlights_WhenCalled_ReturnsRightItem()
+        {
+            // Act
+            var items = _controller.GetDelayedFlights() as OkObjectResult;
+            // Assert
+            var itemsEq = Assert.IsType<List<FlightDataDisplayModel>>(items.Value);
+            Assert.Equal(3, itemsEq.Count);
+        }
     }
 }

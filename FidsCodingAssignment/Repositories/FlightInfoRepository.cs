@@ -60,7 +60,15 @@ namespace FidsCodingAssignment.Repositories
         /// <returns></returns>
         public IEnumerable<FlightInfoDataModel> GetDelayedFlights()
         {
-            return null;
+            int arrival_Time_Allowance = Convert.ToInt32(Environment.GetEnvironmentVariable("Arrival_Time_Allowance"));
+            int departure_Time_Allowance = Convert.ToInt32(Environment.GetEnvironmentVariable("Departure_Time_Allowance"));
+
+            List<FlightInfoDataModel> fids = _dbSet.DFWGateLoungeFlightList.Where(a => 
+                (DateTime.Compare(Convert.ToDateTime(a.EstimatedTime), Convert.ToDateTime(a.ScheduleTime)) >= 0)
+                && (Convert.ToDateTime(a.EstimatedTime).Subtract(Convert.ToDateTime(a.ScheduleTime))).TotalMinutes 
+                > (a.ArrDep.Equals("ARR") ? arrival_Time_Allowance : departure_Time_Allowance)).ToList();
+
+            return fids;
         }
     }
 }

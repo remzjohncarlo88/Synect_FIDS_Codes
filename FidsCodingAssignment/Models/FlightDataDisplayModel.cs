@@ -8,7 +8,7 @@
         /// <summary>
         /// Classification (Arrival/Departure)
         /// </summary>
-        public string? Classification { get; set; }
+        public string Classification { get; set; } = string.Empty;
         /// <summary>
         /// Airline Code + FlightNumber
         /// </summary>
@@ -16,7 +16,7 @@
         /// <summary>
         /// Original Time (Departure)
         /// </summary>
-        public string? OriginalTime { get; set; }
+        public DateTime? OriginalTime { get; set; }
         /// <summary>
         /// Place of Origin (Arrival)
         /// </summary>
@@ -24,7 +24,7 @@
         /// <summary>
         /// Actual Time Of Arrival
         /// </summary>
-        public string? ActualTimeOfArrival { get; set; }
+        public DateTime? ActualTimeOfArrival { get; set; }
         /// <summary>
         /// Destination (Departure)
         /// </summary>
@@ -32,7 +32,7 @@
         /// <summary>
         /// Actual Time Of Departure
         /// </summary>
-        public string? ActualTimeOfDeparture { get; set; }
+        public DateTime? ActualTimeOfDeparture { get; set; }
         /// <summary>
         /// Airline Name
         /// </summary>

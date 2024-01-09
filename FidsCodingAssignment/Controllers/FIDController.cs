@@ -40,5 +40,22 @@ namespace FidsCodingAssignment.Controllers
 
             return Ok(flightStatus);
         }
+
+        /// <summary>
+        /// Get Delayed Flight List
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FlightDataDisplayModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("GetDelayedFlights")]
+        public IActionResult GetDelayedFlights()
+        {
+            var delayedFlights = _flightInfoService.GetDelayedFlights();
+
+            if (delayedFlights == null)
+                return NotFound();
+
+            return Ok(delayedFlights);
+        }
     }
 }
