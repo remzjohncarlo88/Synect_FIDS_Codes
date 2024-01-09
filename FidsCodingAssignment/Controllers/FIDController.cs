@@ -9,19 +9,16 @@ namespace FidsCodingAssignment.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class FDIController : ControllerBase
+    public class FIDController : ControllerBase
     {
-        private readonly ILogger<FDIController> _logger;
         private readonly IFlightInfoService _flightInfoService;
 
         /// <summary>
         /// FDIController constructor
         /// </summary>
-        /// <param name="logger">logger object</param>
         /// <param name="flightInfoService">flight info service object</param>
-        public FDIController(ILogger<FDIController> logger, IFlightInfoService flightInfoService)
+        public FIDController(IFlightInfoService flightInfoService)
         {
-            _logger = logger;
             _flightInfoService = flightInfoService;
         }
 
@@ -32,14 +29,16 @@ namespace FidsCodingAssignment.Controllers
         /// <param name="flightNumber">flight number</param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FlightDataDisplayModel))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpGet("CheckFlightStatus")]        
-        public FlightDataDisplayModel CheckFlightStatus(string airlineCode, int flightNumber)
+        [HttpGet("CheckFlightStatus")]
+        public IActionResult CheckFlightStatus(string airlineCode, int flightNumber)
         {
             var flightStatus = _flightInfoService.CheckFlightStatus(airlineCode, flightNumber);
-            return flightStatus;
+
+            if (flightStatus == null)
+                return NotFound();
+
+            return Ok(flightStatus);
         }
     }
 }

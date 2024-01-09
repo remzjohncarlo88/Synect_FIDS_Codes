@@ -28,25 +28,28 @@ namespace FidsCodingAssignment.Services
         public FlightDataDisplayModel CheckFlightStatus(string airlineCode, int flightNumber)
         {
             FlightInfoDataModel _flightInfoDataModel = _flightInfoRepository.CheckFlightStatus(airlineCode, flightNumber);
-            bool isArrival = _flightInfoDataModel.ArrDep.Equals("ARR") ? true : false;
-
-            
             FlightDataDisplayModel fid = new FlightDataDisplayModel();
-            fid.Classification = isArrival ? "ARRIVAL" : "DEPARTURE";
-            fid.FlightId = string.Concat(_flightInfoDataModel.AirlineCode, ' ', _flightInfoDataModel.FlightNumber);
-            fid.OriginalTime = _flightInfoDataModel.ScheduleTime;
-            fid.AirlineName = _flightInfoDataModel.AirlineName;
-            fid.Status = _flightInfoDataModel.Remarks;
 
-            if (isArrival)
+            if (_flightInfoDataModel != null)
             {
-                fid.OriginPlace = _flightInfoDataModel.CityName;
-                fid.ActualTimeOfArrival = _flightInfoDataModel.EstimatedTime;
-            }
-            else
-            {
-                fid.Destination = _flightInfoDataModel.CityName;
-                fid.GateCode = _flightInfoDataModel.GateCode;
+                bool isArrival = _flightInfoDataModel.ArrDep.Equals("ARR") ? true : false;
+
+                fid.Classification = isArrival ? "ARRIVAL" : "DEPARTURE";
+                fid.FlightId = string.Concat(_flightInfoDataModel.AirlineCode, ' ', _flightInfoDataModel.FlightNumber);
+                fid.OriginalTime = _flightInfoDataModel.ScheduleTime;
+                fid.AirlineName = _flightInfoDataModel.AirlineName;
+                fid.Status = _flightInfoDataModel.Remarks;
+
+                if (isArrival)
+                {
+                    fid.OriginPlace = _flightInfoDataModel.CityName;
+                    fid.ActualTimeOfArrival = _flightInfoDataModel.EstimatedTime;
+                }
+                else
+                {
+                    fid.Destination = _flightInfoDataModel.CityName;
+                    fid.GateCode = _flightInfoDataModel.GateCode;
+                }
             }
 
             return fid;
