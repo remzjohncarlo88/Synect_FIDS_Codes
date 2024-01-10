@@ -106,6 +106,8 @@ namespace FidsCodingAssignment.Services
                 fid.GateCode = _flightInfoDataModel.GateCode;
                 fid.ActualTimeOfDeparture = _flightInfoDataModel.EstimatedTime;
                 fid.Status = isArrival ? _flightInfoDataModel.Remarks : isBoarding ? "Boarding" : "Closed";
+
+                return fid;
             }
 
             return null;
