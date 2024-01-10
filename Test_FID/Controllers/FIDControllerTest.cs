@@ -1,13 +1,7 @@
 ﻿using FidsCodingAssignment.Controllers;
 using FidsCodingAssignment.Models;
 using FidsCodingAssignment.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Test_FID.Services;
 
 namespace Test_FID.Controllers

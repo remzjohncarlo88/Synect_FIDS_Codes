@@ -1,7 +1,5 @@
 ﻿using FidsCodingAssignment.Models;
 using FidsCodingAssignment.Repositories;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 
 namespace FidsCodingAssignment.Services
 {
