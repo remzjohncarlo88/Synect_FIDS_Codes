@@ -43,7 +43,9 @@ namespace FidsCodingAssignment.Repositories
         /// <returns></returns>
         public FlightInfoDataModel CheckFlightStatus(string airlineCode, int flightNumber)
         {
-            return _dbSet.DFWGateLoungeFlightList.FirstOrDefault(d => d.AirlineCode == airlineCode && d.FlightNumber == flightNumber);
+            return _dbSet.DFWGateLoungeFlightList.FirstOrDefault(d => 
+                    d.AirlineCode == airlineCode.ToUpper() 
+                    && d.FlightNumber == flightNumber);
         }
         /// <summary>
         /// Get Delayed Flights
@@ -70,7 +72,7 @@ namespace FidsCodingAssignment.Repositories
         {
             int boarding_Time_Minutes = Convert.ToInt32(Environment.GetEnvironmentVariable("Boarding_Time_Minutes"));
 
-            return _dbSet.DFWGateLoungeFlightList.FirstOrDefault(d => d.GateCode == gateCode
+            return _dbSet.DFWGateLoungeFlightList.FirstOrDefault(d => d.GateCode == gateCode.ToUpper()
                     && d.ArrDep.Equals("DEP")
                     && DateTime.Compare(DateTime.Now, Convert.ToDateTime(d.EstimatedTime)) < 0
                     && DateTime.Now.Subtract(Convert.ToDateTime(d.ScheduleTime)).TotalMinutes <= boarding_Time_Minutes);

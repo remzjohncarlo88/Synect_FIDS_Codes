@@ -33,7 +33,7 @@ namespace Test_FID.Services
         /// <returns></returns>
         public FlightDataDisplayModel CheckFlightStatus(string airlineCode, int flightNumber)
         {
-            return _fids.Where(a => a.FlightId == string.Concat(airlineCode, ' ', flightNumber)).FirstOrDefault();
+            return _fids.Where(a => a.FlightId == string.Concat(airlineCode.ToUpper(), ' ', flightNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Test_FID.Services
         {
             int boarding_Time_Minutes = Convert.ToInt32(Environment.GetEnvironmentVariable("Boarding_Time_Minutes"));
 
-            return _fids.FirstOrDefault(d => d.GateCode == gateCode
+            return _fids.FirstOrDefault(d => d.GateCode == gateCode.ToUpper()
                     && d.Classification.Equals("DEP")
                     && DateTime.Compare(Convert.ToDateTime("2023-08-08T15:58:00Z"), Convert.ToDateTime(d.ActualTimeOfDeparture)) < 0
                     && Convert.ToDateTime("2023-08-08T15:58:00Z").Subtract(Convert.ToDateTime(d.OriginalTime)).TotalMinutes <= boarding_Time_Minutes);
